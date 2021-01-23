@@ -54,5 +54,5 @@ target_compile_options(hello_world_lib_shared PRIVATE
                                                                                             -Wfatal-errors>
     $<$<CXX_COMPILER_ID:MSVC>: /W4>)
 
-add_test(hello_returns_true_if_no_argument_is_passed hello_world_lib_test)
-add_test(hello_returns_true_if_valid_string_is_passed hello_world_lib_test "cmake test user")
+add_test(NAME hello_returns_true_if_no_argument_is_passed COMMAND hello_world_lib_test)
+add_test(NAME hello_returns_true_if_valid_string_is_passed COMMAND hello_world_lib_test "cmake test user")
