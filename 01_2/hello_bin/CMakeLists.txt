@@ -6,5 +6,12 @@ project(
     LANGUAGES CXX
 )
 add_executable(hello_world_bin_shared ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+add_executable(hello_world_bin_static ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+
 target_compile_features(hello_world_bin_shared PUBLIC cxx_std_17)
+target_compile_features(hello_world_bin_static PUBLIC cxx_std_17)
+
+target_link_libraries(hello_world_bin_static LINK_PUBLIC hello_world_lib_static)
 target_link_libraries(hello_world_bin_shared LINK_PUBLIC hello_world_lib_shared)
+
+target_link_options(hello_world_bin_static PRIVATE -static)
