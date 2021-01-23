@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.16)
 project(hello_world VERSION 0.0.1
                     DESCRIPTION "Basic Hello World application"
                     LANGUAGES CXX)
