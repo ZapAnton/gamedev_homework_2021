@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.18)
-project(hello_world_lib VERSION 0.0.1
+project(
+    hello_world_lib
+    VERSION 0.0.1
     DESCRIPTION "Hello World Library"
-                    LANGUAGES CXX)
+    LANGUAGES CXX
+)
 add_library(
     hello_world_lib_static
     STATIC
