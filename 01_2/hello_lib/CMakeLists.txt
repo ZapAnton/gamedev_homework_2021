@@ -31,7 +31,7 @@ target_include_directories(hello_world_lib_shared PUBLIC ${CMAKE_CURRENT_SOURCE_
 target_compile_features(hello_world_lib_static PUBLIC cxx_std_17)
 target_compile_features(hello_world_lib_shared PUBLIC cxx_std_17)
 
-target_link_libraries(hello_world_lib_test LINK_PUBLIC hello_world_lib_shared)
+target_link_libraries(hello_world_lib_test PUBLIC hello_world_lib_shared)
 
 target_compile_options(hello_world_lib_static PRIVATE
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:  -Wall

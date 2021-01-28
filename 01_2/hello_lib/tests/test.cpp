@@ -1,4 +1,4 @@
-#include <assert.h>
+#include <cassert>
 #include <hello_world_lib.h>
 #include <string>
 
