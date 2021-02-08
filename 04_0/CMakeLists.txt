@@ -8,6 +8,9 @@ project(
 add_executable(
     basic_ppm
     ${CMAKE_CURRENT_SOURCE_DIR}/basic_ppm/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/basic_ppm/canvas.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/basic_ppm/canvas.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/basic_ppm/color.hpp
 )
 target_compile_features(
     basic_ppm
