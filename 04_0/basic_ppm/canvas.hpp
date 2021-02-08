@@ -3,6 +3,7 @@
 #include "color.hpp"
 #include <array>
 #include <cstddef>
+#include <string>
 
 constexpr size_t BUFFER_HEIGHT = 240;
 constexpr size_t BUFFER_WIDTH = 320;
@@ -15,5 +16,6 @@ class Canvas {
   public:
     Canvas();
     void set_color(const Color &color);
+    void write_to_file(const std::string &filename);
 };
 #endif
