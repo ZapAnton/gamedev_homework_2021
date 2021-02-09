@@ -17,5 +17,7 @@ class Canvas {
     Canvas();
     void set_color(const Color &color);
     void write_to_file(const std::string &filename);
+    void read_from_file(const std::string &filename);
+    friend bool operator!=(const Canvas &l_canvas, const Canvas &r_canvas);
 };
 #endif
