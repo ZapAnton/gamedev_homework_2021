@@ -9,6 +9,16 @@ add_executable(
     sdl_loop
     ${CMAKE_CURRENT_LIST_DIR}/game.cpp
 )
+find_package(
+    SDL2
+    REQUIRED
+)
+target_link_libraries(
+    sdl_loop
+    PRIVATE
+    SDL2::SDL2
+    SDL2::SDL2main
+)
 target_compile_features(
     sdl_loop
     PUBLIC
