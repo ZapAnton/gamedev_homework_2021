@@ -21,6 +21,7 @@ void print_key(const SDL_Event &event) {
 */
 
 #include "engine.hpp"
+#include <iostream>
 
 int main() {
     psi_engine::Engine game_engine;
@@ -37,6 +38,7 @@ int main() {
                 game_is_running = false;
                 break;
             default:
+                std::cout << "Current event: " << event << std::endl;
                 break;
         }
     }
