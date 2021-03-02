@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
-#include <SDL.h>
+/*
 #include <unordered_map>
 
 const std::unordered_map<SDL_Keycode, const char*> GAME_KEYS = {
@@ -20,47 +18,28 @@ void print_key(const SDL_Event &event) {
     const std::string prefix_message { (event.type == SDL_KEYDOWN) ? "Key pressed: " : "Key released: " };
     std::cout << prefix_message << GAME_KEYS.at(key_code) << std::endl;
 }
+*/
+
+#include "engine.hpp"
 
 int main() {
-    const int SDL_INIT_RESULT = SDL_Init(SDL_INIT_EVERYTHING);
-    if (SDL_INIT_RESULT != 0) {
-        const std::string error_message{SDL_GetError()};
-        std::cerr << "Failed to call SDL_Init: " << error_message << std::endl;
-        return EXIT_FAILURE;
-    }
-    SDL_Window* const window = SDL_CreateWindow(
-        "Stay Grey",
-        SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED,
-        1024,
-        768,
-        SDL_WINDOW_SHOWN
-    );
-    if (window == nullptr) {
-        const std::string error_message{SDL_GetError()};
-        std::cerr << "Failed to call SDL_CreateWindow: " << error_message << std::endl;
-        SDL_Quit();
-        return EXIT_FAILURE;
-    }
+    psi_engine::Engine game_engine;
+    game_engine.initialize("Stay Grey"); // TODO: Add exception handling
     bool game_is_running = true;
     while (game_is_running) {
-        SDL_Event event;
-        if (SDL_PollEvent(&event) != 1) {
+        psi_engine::event event;
+        game_engine.read_input(event);
+        if (event == psi_engine::event::read_error) {
             continue;
         }
-        switch (event.type) {
-            case SDL_QUIT:
+        switch (event) {
+            case psi_engine::event::exit:
                 game_is_running = false;
-                break;
-            case SDL_KEYUP:
-            case SDL_KEYDOWN:
-                print_key(event);
                 break;
             default:
                 break;
         }
     }
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    game_engine.uninitialize();
     return EXIT_SUCCESS;
 }
