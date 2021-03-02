@@ -1,13 +1,11 @@
-#include <unordered_map>
-#include <array>
 #include "engine.hpp"
+#include <array>
+#include <unordered_map>
 
-namespace psi_engine
-{
-Engine::Engine(): window{nullptr} {
-}
+namespace psi_engine {
+Engine::Engine() : window{nullptr} {}
 
-Engine::~Engine(){}
+Engine::~Engine() {}
 
 void Engine::initialize(const std::string &game_name) {
     const int SDL_INIT_RESULT = SDL_Init(SDL_INIT_EVERYTHING);
@@ -17,17 +15,13 @@ void Engine::initialize(const std::string &game_name) {
         // return EXIT_FAILURE;
         // TODO: throw exception
     }
-    this->window = SDL_CreateWindow(
-        game_name.c_str(),
-        SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED,
-        1024,
-        768,
-        SDL_WINDOW_SHOWN
-    );
+    this->window =
+        SDL_CreateWindow(game_name.c_str(), SDL_WINDOWPOS_CENTERED,
+                         SDL_WINDOWPOS_CENTERED, 1024, 768, SDL_WINDOW_SHOWN);
     if (this->window == nullptr) {
         const std::string error_message{SDL_GetError()};
-        std::cerr << "Failed to call SDL_CreateWindow: " << error_message << std::endl;
+        std::cerr << "Failed to call SDL_CreateWindow: " << error_message
+                  << std::endl;
         SDL_Quit();
         // return EXIT_FAILURE;
         // TODO: throw exception
@@ -58,7 +52,9 @@ static event map_sdl_to_engine_event(const SDL_Event &sdl_event) {
         return event::unknown_event;
     }
     const auto input_pair = GAME_KEYS.at(key_code);
-    const auto engine_event = (sdl_event.type == SDL_KEYDOWN) ? input_pair.press_event : input_pair.release_event;
+    const auto engine_event = (sdl_event.type == SDL_KEYDOWN)
+                                  ? input_pair.press_event
+                                  : input_pair.release_event;
     return engine_event;
 }
 
@@ -69,21 +65,20 @@ void Engine::read_input(event &engine_event) {
         return;
     }
     switch (sdl_event.type) {
-        case SDL_QUIT:
-            engine_event = event::exit;
-            break;
-        case SDL_KEYDOWN:
-        case SDL_KEYUP:
-            engine_event = map_sdl_to_engine_event(sdl_event);
-            break;
-        default:
-            engine_event = event::unknown_event;
-            break;
+    case SDL_QUIT:
+        engine_event = event::exit;
+        break;
+    case SDL_KEYDOWN:
+    case SDL_KEYUP:
+        engine_event = map_sdl_to_engine_event(sdl_event);
+        break;
+    default:
+        engine_event = event::unknown_event;
+        break;
     }
 }
 
-
-static std::array<std::string, 15> event_names {
+static std::array<std::string, 15> event_names{
     "exit",
     "unknown_event",
     "read_error",
@@ -101,15 +96,14 @@ static std::array<std::string, 15> event_names {
     "left_released",
 };
 
-std::ostream& operator<<(std::ostream& stream, const event e) {
-  std::uint32_t value   = static_cast<std::uint32_t>(e);
-   std::uint32_t minimal = static_cast<std::uint32_t>(event::exit);
-   std::uint32_t maximal = static_cast<std::uint32_t>(event::left_released);
-   if (value < minimal || value > maximal)
-   {
-       throw std::runtime_error("too big event value");
-   }
-   stream << event_names[value];
-   return stream;
+std::ostream &operator<<(std::ostream &stream, const event e) {
+    std::uint32_t value = static_cast<std::uint32_t>(e);
+    std::uint32_t minimal = static_cast<std::uint32_t>(event::exit);
+    std::uint32_t maximal = static_cast<std::uint32_t>(event::left_released);
+    if (value < minimal || value > maximal) {
+        throw std::runtime_error("too big event value");
+    }
+    stream << event_names[value];
+    return stream;
 }
 } // end namespace psi_engine

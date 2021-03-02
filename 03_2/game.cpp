@@ -15,8 +15,9 @@ void print_key(const SDL_Event &event) {
     if (GAME_KEYS.find(key_code) == GAME_KEYS.end()) {
         return;
     }
-    const std::string prefix_message { (event.type == SDL_KEYDOWN) ? "Key pressed: " : "Key released: " };
-    std::cout << prefix_message << GAME_KEYS.at(key_code) << std::endl;
+    const std::string prefix_message { (event.type == SDL_KEYDOWN) ? "Key
+pressed: " : "Key released: " }; std::cout << prefix_message <<
+GAME_KEYS.at(key_code) << std::endl;
 }
 */
 
@@ -34,12 +35,12 @@ int main() {
             continue;
         }
         switch (event) {
-            case psi_engine::event::exit:
-                game_is_running = false;
-                break;
-            default:
-                std::cout << "Current event: " << event << std::endl;
-                break;
+        case psi_engine::event::exit:
+            game_is_running = false;
+            break;
+        default:
+            std::cout << "Current event: " << event << std::endl;
+            break;
         }
     }
     game_engine.uninitialize();
