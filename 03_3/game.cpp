@@ -1,26 +1,3 @@
-/*
-#include <unordered_map>
-
-const std::unordered_map<SDL_Keycode, const char*> GAME_KEYS = {
-    {SDLK_SPACE, "select"},
-    {SDLK_e, "button_1"},
-    {SDLK_UP, "up"},
-    {SDLK_DOWN, "down"},
-    {SDLK_RIGHT, "right"},
-    {SDLK_LEFT, "left"},
-};
-
-void print_key(const SDL_Event &event) {
-    const auto key_code = event.key.keysym.sym;
-    if (GAME_KEYS.find(key_code) == GAME_KEYS.end()) {
-        return;
-    }
-    const std::string prefix_message { (event.type == SDL_KEYDOWN) ? "Key
-pressed: " : "Key released: " }; std::cout << prefix_message <<
-GAME_KEYS.at(key_code) << std::endl;
-}
-*/
-
 #include "engine.hpp"
 #include <iostream>
 
